@@ -4,7 +4,7 @@ const clienteModel = require('../src/models/clienteModel');
 
 describe('API de Clientes', () => {
   beforeEach(() => {
-    clienteModel.resetarDados(); // Limpa dados entre testes
+    clienteModel.resetarDados(); 
   });
 
   it('deve criar um cliente', async () => {
