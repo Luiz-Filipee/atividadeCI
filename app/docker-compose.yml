@@ -27,5 +27,22 @@ services:
       - "3000:3000"
     command: ["npm", "run", "migrate", "&&", "npm", "start"]
 
+  ci:
+    build: .
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      PG_HOST: db
+      PG_PORT: 5432
+      PG_USER: postgres
+      PG_PASSWORD: postgres
+      PG_DATABASE: clientes_test_db
+      NODE_ENV: test
+    command: >
+      sh -c "npm install &&
+             npx knex migrate:latest --env test &&
+             npm test"
+
 volumes:
   pgdata:
